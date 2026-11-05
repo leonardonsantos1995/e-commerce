@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produto — Victoria Ferrarini Joias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .pdp > *{min-width:0}
+  .pdp{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;padding-top:28px;align-items:start}
+  .crumbs{color:var(--muted);margin-bottom:18px}
+  .gallery{display:grid;grid-template-columns:84px 1fr;gap:14px;position:sticky;top:100px}
+  .thumbs{display:flex;flex-direction:column;gap:10px}
+  .thumbs button{border-radius:12px;overflow:hidden;aspect-ratio:1;border:2px solid transparent;background:var(--sand);transition:.2s}
+  .thumbs button.on{border-color:var(--ink)}
+  .thumbs img{width:100%;height:100%;object-fit:cover}
+  .main-img{position:relative;border-radius:24px;overflow:hidden;background:var(--sand);aspect-ratio:1}
+  .main-img .slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .main-img .slides::-webkit-scrollbar{display:none}
+  .main-img img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
+  .dots{position:absolute;bottom:14px;left:0;right:0;display:none;justify-content:center;gap:6px}
+  .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6)}
+  .dots i.on{background:#fff;width:20px;border-radius:999px}
+  .info h1{font-size:clamp(34px,3.6vw,46px);margin:10px 0 12px}
+  .stars{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)}
+  .stars span{color:var(--gold);letter-spacing:2px}
+  .pbox{margin:22px 0;padding:22px 0;border-top:1px solid var(--sand-2);border-bottom:1px solid var(--sand-2)}
+  .pbox .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .pbox .now{font-size:32px;font-weight:700;letter-spacing:-.01em}
+  .pbox .old{font-size:17px;color:var(--muted);text-decoration:line-through}
+  .pbox .pct{background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+  .pbox .inst{font-size:14.5px;margin-top:6px;color:var(--ink-2)}
+  .promo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .promo-tags span{background:var(--gold-soft);color:var(--gold-dark);font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px}
+  .opt-label{font-size:14px;font-weight:600;margin-bottom:10px}
+  .opt-label span{color:var(--muted);font-weight:400}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .opts button{min-width:52px;padding:11px 16px;border-radius:12px;border:1.5px solid var(--sand-2);background:#fff;font-weight:600;font-size:14px;transition:.2s}
+  .opts button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+  .opts button.na{opacity:.4;text-decoration:line-through}
+  .buy{display:flex;gap:12px;margin-bottom:12px}
+  .buy .qty{margin:0}
+  .buy .btn{flex:1}
+  .wa-buy{width:100%;margin-bottom:20px}
+  .wh{display:flex;gap:14px;align-items:center;background:var(--sand);border-radius:16px;padding:16px 18px;font-size:14px;color:var(--ink-2);margin-bottom:22px}
+  .wh b{color:var(--ink)}
+  .wh .ic{flex:none;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--gold-dark);display:flex;align-items:center;justify-content:center}
+  .wh .ic svg{width:20px;height:20px}
+  .wh a{color:var(--gold-dark);font-weight:700;text-decoration:underline;white-space:nowrap}
+  .mini-ben{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px}
+  .mini-ben div{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-2)}
+  .mini-ben svg{width:22px;height:22px;color:var(--gold);flex:none}
+  .info .faq summary{font-size:16px}
+  .sticky-buy{position:fixed;left:0;right:0;bottom:0;z-index:65;background:#fff;border-top:1px solid var(--sand-2);padding:12px 18px;display:none;align-items:center;gap:12px;transform:translateY(100%);transition:.3s}
+  .sticky-buy.show{transform:none}
+  .sticky-buy b{display:block;font-size:16px}
+  .sticky-buy small{color:var(--muted);font-size:12px}
+  .sticky-buy .btn{flex:1;padding:14px}
+  .notfound{text-align:center;padding:120px 0}
+  @media (max-width:1000px){
+    .pdp{grid-template-columns:1fr;gap:28px}
+    .gallery{position:static;grid-template-columns:1fr}
+    .thumbs{display:none}
+    .dots{display:flex}
+    .main-img{border-radius:20px}
+  }
+  @media (max-width:680px){
+    .sticky-buy{display:flex}
+    body.pdp-page .wa-float{bottom:92px}
+    .mini-ben{grid-template-columns:1fr}
+    .buy .btn{min-width:0;white-space:normal;padding:14px 16px}
+  }
+</style>
+</head>
+<body data-page="produto" class="pdp-page">
+<div id="site-header"></div>
+
+<main class="wrap" id="pdp"></main>
+
+<section class="wrap section" id="relWrap">
+  <div class="row-head">
+    <div class="section-head"><span class="eyebrow">Combine com</span><h2>Você também vai amar</h2></div>
+    <div class="rail-nav"><button data-rail="rel" data-dir="-1" aria-label="Anterior"></button><button data-rail="rel" data-dir="1" aria-label="Próximo"></button></div>
+  </div>
+  <div id="rel"></div>
+</section>
+
+<div data-benefits="light"></div>
+<div id="site-footer"></div>
+<div class="sticky-buy" id="stickyBuy"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const { BY, COLS, TYPE2COL, col, img, brl, inst, url, I, qs, qsa, params, off, add, toast, railHTML, bindRail, WA, totals } = VF;
+  qsa(".rail-nav button").forEach(b => b.innerHTML = b.dataset.dir === "1" ? I.right : I.left);
+  const p = BY[params.get("p")] || PRODUCTS.find(x => x.a);
+  document.title = p.t + " — Victoria Ferrarini Joias";
+  const cHandle = TYPE2COL[p.c];
+  const cName = cHandle ? COLS[cHandle].n : p.c;
+  let variant = p.v ? (p.v.find(v => v[2]) || p.v[0]) : null;
+  let qty = 1;
+  const price = () => variant ? variant[1] : p.p;
+  const available = () => variant ? !!variant[2] : !!p.a;
+
+  qs("#pdp").innerHTML = `
+  <div class="pdp">
+    <div>
+      <nav class="crumbs"><a href="index.html">Início</a> / ${cHandle ? `<a href="${url.c(cHandle)}">${cName}</a> / ` : ""}<span>${p.t}</span></nav>
+      <div class="gallery">
+        <div class="thumbs">${p.i.map((x, i) => `<button class="${i ? "" : "on"}" data-i="${i}"><img src="${img(x, 160)}" alt=""></button>`).join("")}</div>
+        <div class="main-img"><div class="slides" id="slides">${p.i.map(x => `<img src="${img(x, 1100)}" alt="${p.t}">`).join("")}</div>
+          <div class="dots">${p.i.map((x, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div></div>
+      </div>
+    </div>
+    <div class="info">
+      <span class="eyebrow">${cName}</span>
+      <h1>${p.t}</h1>
+      <div class="stars"><span>★★★★★</span> Joia à prova d'água · Garantia vitalícia</div>
+      <div class="pbox" id="pbox"></div>
+      ${p.v ? `<div class="opt-label">${p.on}: <span id="optName">${variant[0]}</span></div><div class="opts" id="opts">${p.v.map(v => `<button class="${v === variant ? "on" : ""} ${v[2] ? "" : "na"}" data-v="${v[0]}">${v[0]}</button>`).join("")}</div>` : ""}
+      <div class="buy">
+        <div class="qty lg"><button id="qm" aria-label="Diminuir">−</button><span id="qv">1</span><button id="qp" aria-label="Aumentar">+</button></div>
+        <button class="btn btn-dark" id="addBtn">${I.bag} Adicionar à sacola</button>
+      </div>
+      <a class="btn btn-wa wa-buy" target="_blank" rel="noopener" href="${WA("Olá! Tenho interesse na peça: " + p.t)}">${I.wa} Comprar pelo WhatsApp</a>
+      <div class="wh"><div class="ic">${I.gift}</div><div>Revende? Levando <b>15 peças ou mais</b> o desconto de atacado (até 50%) é aplicado automaticamente. <a href="atacado.html">Saiba mais</a></div></div>
+      <div class="mini-ben">
+        <div>${I.drop} 100% à prova d'água</div><div>${I.shield} Garantia vitalícia na cor</div>
+        <div>${I.leaf} Hipoalergênica, aço 316L</div><div>${I.truck} Frete grátis acima de R$ 199</div>
+      </div>
+      <div class="faq">
+        <details open><summary>Descrição<span class="pl">+</span></summary><div class="prose">${p.x || "<p>Joia em aço inoxidável 316L com banho de ouro PVD.</p>"}</div></details>
+        <details><summary>Material e cuidados<span class="pl">+</span></summary><div class="prose"><p>Fabricada em <b>aço inoxidável cirúrgico 316L</b>, naturalmente hipoalergênico, com <b>banho de ouro PVD</b> — tecnologia 10x mais espessa e duradoura que os banhos tradicionais.</p><p>Pode usar no banho, mar, piscina e academia. Para manter o brilho, guarde separada de outras peças e evite atrito com superfícies ásperas.</p></div></details>
+        <details><summary>Garantia<span class="pl">+</span></summary><div class="prose"><p><b>Vitalícia</b> contra escurecimento e oxidação, <b>1 ano</b> contra desbotamento da cor e <b>1 ano</b> para defeitos de fabricação. Acompanha Certificado de Garantia. <a href="garantia.html" style="text-decoration:underline">Ver detalhes</a></p></div></details>
+        <details><summary>Envio e trocas<span class="pl">+</span></summary><div class="prose"><p>Enviamos em até 2 dias úteis após a confirmação do pagamento, a partir de Porto Alegre/RS, com código de rastreio por e-mail. Trocas e devoluções em até 14 dias após o recebimento, com frete por nossa conta. <a href="politicas.html#trocas" style="text-decoration:underline">Ver políticas</a></p></div></details>
+      </div>
+    </div>
+  </div>`;
+
+  function renderPrice() {
+    const pr = price(), d = p.o && pr < p.o ? Math.round((1 - pr / p.o) * 100) : 0;
+    qs("#pbox").innerHTML = `<div class="row">${d ? `<span class="old">${brl(p.o)}</span>` : ""}<span class="now">${brl(pr)}</span>${d ? `<span class="pct">-${d}%</span>` : ""}</div>
+      <div class="inst">${inst(pr)}</div>
+      <div class="promo-tags"><span>Leve 1, ganhe 1</span><span>10% de cashback</span></div>`;
+    const ok = available();
+    const b = qs("#addBtn"); b.disabled = !ok; b.innerHTML = ok ? `${I.bag} Adicionar à sacola` : "Esgotado";
+    qs("#stickyBuy").innerHTML = `<div><b>${brl(pr)}</b><small>${inst(pr)}</small></div><button class="btn btn-dark" ${ok ? "" : "disabled"} id="addSticky">${ok ? "Adicionar à sacola" : "Esgotado"}</button>`;
+  }
+  renderPrice();
+
+  // gallery
+  const slides = qs("#slides");
+  qsa(".thumbs button").forEach(b => b.addEventListener("click", () => slides.scrollTo({ left: slides.clientWidth * +b.dataset.i, behavior: "smooth" })));
+  slides.addEventListener("scroll", () => {
+    const i = Math.round(slides.scrollLeft / slides.clientWidth);
+    qsa(".thumbs button").forEach((b, k) => b.classList.toggle("on", k === i));
+    qsa(".dots i").forEach((d, k) => d.classList.toggle("on", k === i));
+  });
+
+  // options
+  qs("#opts")?.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    variant = p.v.find(v => v[0] === b.dataset.v);
+    qsa("#opts button").forEach(x => x.classList.toggle("on", x === b));
+    qs("#optName").textContent = variant[0]; renderPrice();
+  });
+  qs("#qm").onclick = () => { qty = Math.max(1, qty - 1); qs("#qv").textContent = qty; };
+  qs("#qp").onclick = () => { qty++; qs("#qv").textContent = qty; };
+
+  function doAdd() {
+    if (!available()) return;
+    add(p.h, variant ? variant[0] : "", qty);
+    VF.open("cartDrawer");
+  }
+  qs("#addBtn").addEventListener("click", doAdd);
+  qs("#stickyBuy").addEventListener("click", e => { if (e.target.id === "addSticky") doAdd(); });
+  new IntersectionObserver(([en]) => qs("#stickyBuy").classList.toggle("show", !en.isIntersecting)).observe(qs("#addBtn"));
+
+  // related
+  const rel = (cHandle ? col(cHandle) : PRODUCTS).filter(x => x.h !== p.h && x.a).slice(0, 12);
+  qs("#rel").innerHTML = railHTML("relRail", rel);
+  qsa("[data-rail='rel']").forEach(b => b.dataset.rail = "relRail"); bindRail("relRail");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fale conosco — Victoria Ferrarini Joias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .channels{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:-60px;position:relative;z-index:3}
+  .ch{background:#fff;border:1px solid var(--sand-2);border-radius:24px;padding:30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .ch .ic{width:52px;height:52px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--gold-dark);margin-bottom:6px}
+  .ch .ic svg{width:24px;height:24px}
+  .ch h3{font-family:var(--sans);font-size:18px;font-weight:700;letter-spacing:0}
+  .ch p{color:var(--ink-2);font-size:15px;flex:1}
+  .ch .btn{align-self:flex-start;margin-top:8px;padding:12px 20px;font-size:14px}
+  .ch.wa .ic{background:#E3F8EA;color:#128C4B}
+  .contact{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+  .form{background:#fff;border:1px solid var(--sand-2);border-radius:28px;padding:40px}
+  .form .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .side{display:grid;gap:18px}
+  .side .card2{background:var(--sand);border-radius:24px;padding:28px}
+  .side h4{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--gold-dark);margin-bottom:12px}
+  .side p{color:var(--ink-2);font-size:15px}
+  .hours{display:grid;gap:8px;font-size:15px}
+  .hours div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--sand-2);padding-bottom:8px}
+  .map{border-radius:24px;overflow:hidden;height:240px;border:1px solid var(--sand-2)}
+  .map iframe{width:100%;height:100%;border:0;filter:grayscale(.4)}
+  @media (max-width:1000px){.channels,.contact{grid-template-columns:1fr}.channels{margin-top:-40px}}
+  @media (max-width:680px){.form{padding:24px}.form .two{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="contato">
+<div id="site-header"></div>
+
+<section class="page-hero" style="min-height:380px">
+  <img src="https://victoriaferrarini.com/cdn/shop/files/6AD3935B-E717-4939-9BB9-564A1D83101F.jpg?width=1800" alt="" style="object-position:center 30%">
+  <div class="wrap" style="padding-bottom:96px">
+    <nav class="crumbs"><a href="index.html">Início</a> / <span>Fale conosco</span></nav>
+    <h1>Fale conosco</h1>
+    <p>Estamos aqui para ajudar — com dúvidas, trocas, garantia ou para escolher o presente perfeito.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="channels">
+    <div class="ch wa"><div class="ic" id="icWa"></div><h3>WhatsApp</h3><p>Fale com nossas vendedoras em tempo real. É o jeito mais rápido.</p><b>(51) 98033-4044</b><a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/5551980334044">Abrir conversa</a></div>
+    <div class="ch"><div class="ic" id="icMail"></div><h3>E-mail</h3><p>Para trocas, garantia e assuntos que precisam de anexos.</p><b>suporte@victoriaferrarini.com</b><a class="btn btn-line" href="mailto:suporte@victoriaferrarini.com">Enviar e-mail</a></div>
+    <div class="ch"><div class="ic" id="icFaq"></div><h3>Dúvidas frequentes</h3><p>Prazos, pagamentos, trocas, garantia e atacado — respostas rápidas.</p><b>Respostas em segundos</b><a class="btn btn-line" href="faq.html">Ver dúvidas</a></div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="contact">
+    <form class="form" id="form">
+      <span class="eyebrow">Envie uma mensagem</span>
+      <h2 style="margin:10px 0 24px;font-size:38px">Como podemos ajudar?</h2>
+      <div class="two"><div class="field"><label>Nome</label><input required placeholder="Seu nome"></div><div class="field"><label>Telefone</label><input placeholder="(00) 00000-0000"></div></div>
+      <div class="field"><label>E-mail</label><input type="email" required placeholder="voce@email.com"></div>
+      <div class="field"><label>Assunto</label><select><option>Dúvida sobre produto</option><option>Meu pedido</option><option>Troca ou devolução</option><option>Garantia</option><option>Atacado / revenda</option><option>Outro assunto</option></select></div>
+      <div class="field"><label>Número do pedido <span class="muted" style="font-weight:400">(opcional)</span></label><input placeholder="#0000"></div>
+      <div class="field"><label>Mensagem</label><textarea required placeholder="Conte pra gente…"></textarea></div>
+      <button class="btn btn-dark">Enviar mensagem</button>
+    </form>
+    <div class="side">
+      <div class="card2"><h4>Horário de atendimento</h4><div class="hours"><div><span>Segunda a sexta</span><b>8h às 18h</b></div><div><span>Sábado</span><b>10h às 18h</b></div><div style="border:0"><span>Domingo e feriados</span><b class="muted">Fechado</b></div></div></div>
+      <div class="card2"><h4>Nosso endereço</h4><p><b style="color:var(--ink)">Victoria Ferrarini Joias</b><br>Rua Felix da Cunha, 836, sala 202<br>Moinhos de Vento · Porto Alegre/RS<br>CEP 90570-001</p><p style="margin-top:10px;font-size:13px">CNPJ 57.488.863/0001-77</p></div>
+      <div class="map"><iframe loading="lazy" title="Mapa" src="https://www.google.com/maps?q=Rua+Felix+da+Cunha,+836,+Porto+Alegre&output=embed"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const { I, qs, toast } = VF;
+  qs("#icWa").innerHTML = I.wa; qs("#icMail").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>'; qs("#icFaq").innerHTML = I.chat;
+  qs("#form").addEventListener("submit", e => { e.preventDefault(); e.target.reset(); toast("✓ Mensagem enviada! Respondemos em até 1 dia útil."); });
+});
+</script>
+</body>
+</html>

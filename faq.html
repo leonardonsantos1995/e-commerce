@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dúvidas frequentes — Victoria Ferrarini Joias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .faq-search{max-width:640px;margin:26px 0 0;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--sand-2);border-radius:999px;padding:6px 6px 6px 22px}
+  .faq-search svg{width:20px;height:20px;color:var(--muted);flex:none}
+  .faq-search input{flex:1;border:0;outline:0;padding:12px 0;background:none;font-size:16px;min-width:0}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:56px;align-items:start}
+  .topics{position:sticky;top:110px;display:grid;gap:6px}
+  .topics a{padding:12px 16px;border-radius:12px;font-weight:600;font-size:14.5px;color:var(--ink-2);display:flex;justify-content:space-between}
+  .topics a:hover,.topics a.on{background:var(--sand);color:var(--ink)}
+  .topics a span{color:var(--muted);font-weight:500}
+  .group{margin-bottom:48px;scroll-margin-top:110px}
+  .group h2{font-size:34px;margin-bottom:6px}
+  .group .faq{max-width:none}
+  .help{background:var(--ink);color:#fff;border-radius:24px;padding:34px;margin-top:20px}
+  .help h3{font-size:30px;margin-bottom:8px}
+  .help p{color:#CFC6B8;margin-bottom:20px}
+  .none{display:none;padding:40px 0;color:var(--ink-2)}
+  @media (max-width:1000px){.layout{grid-template-columns:1fr}.topics{position:static;display:flex;overflow-x:auto;scrollbar-width:none}.topics a{white-space:nowrap;background:var(--sand)}}
+</style>
+</head>
+<body data-page="faq">
+<div id="site-header"></div>
+
+<section class="page-hero light">
+  <div class="wrap" style="padding-top:56px;padding-bottom:48px">
+    <nav class="crumbs"><a href="index.html">Início</a> / <span>Dúvidas frequentes</span></nav>
+    <h1>Como podemos ajudar?</h1>
+    <p>Encontre respostas sobre pedidos, entregas, trocas, garantia e atacado.</p>
+    <label class="faq-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Busque por “troca”, “prazo”, “garantia”…"></label>
+  </div>
+</section>
+
+<main class="wrap section">
+  <div class="layout">
+    <nav class="topics" id="topics"></nav>
+    <div>
+      <div id="groups"></div>
+      <p class="none" id="none">Nenhuma pergunta encontrada. Fale com a gente pelo WhatsApp que respondemos rapidinho.</p>
+      <div class="help"><h3>Não encontrou sua resposta?</h3><p>Nossa equipe atende de segunda a sexta, das 8h às 18h, e aos sábados, das 10h às 18h.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/5551980334044">WhatsApp (51) 98033-4044</a><a class="btn" style="border:1.5px solid #4a443d;color:#fff" href="contato.html">Outros canais</a></div></div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+const FAQ = [
+  ["produtos", "Sobre as joias", [
+    ["As joias podem molhar?", "Sim! Nossas joias são 100% à prova d'água, suor e calor. Você pode usar no banho, no mar, na piscina e na academia."],
+    ["De que material são feitas?", "São fabricadas em aço inoxidável cirúrgico 316L, naturalmente hipoalergênico, com banho de ouro PVD — tecnologia 10x mais espessa e duradoura que os banhos de ouro tradicionais."],
+    ["As joias escurecem ou causam alergia?", "Não escurecem, não esverdeiam e não causam alergia. São livres de níquel, cádmio e chumbo, ideais para pele sensível."],
+    ["Como cuidar das minhas joias?", "Guarde cada peça separada para evitar atritos e arranhões, e evite impactos e quedas. Assim o brilho dura muito mais."]
+  ]],
+  ["pedidos", "Pedidos e pagamento", [
+    ["Quais as formas de pagamento?", "Aceitamos cartão de crédito em até 6x sem juros, além de Pix e boleto no checkout."],
+    ["Como funciona o cashback?", "A cada compra você ganha 10% de cashback em crédito para usar na próxima compra."],
+    ["Posso cancelar meu pedido?", "Sim, desde que nos avise em até 24 horas após a compra. Depois que a equipe de logística separa o pedido, não é mais possível cancelar — mas você pode recusar o recebimento e reembolsamos o valor total."],
+    ["Errei o endereço, e agora?", "Fale com nosso suporte pelo e-mail suporte@victoriaferrarini.com ou WhatsApp (51) 98033-4044 em até 24 horas após a compra para atualizarmos o endereço."]
+  ]],
+  ["entrega", "Envio e entrega", [
+    ["Qual o prazo de envio?", "Os pedidos são enviados em até 2 dias úteis após a confirmação do pagamento — normalmente separamos em 24 horas. O prazo de entrega depende do endereço e do frete escolhido."],
+    ["O frete é grátis?", "Sim, para todo o Brasil em pedidos a partir de R$ 199. Compras no atacado também têm frete grátis via Sedex."],
+    ["Como acompanho meu pedido?", "Assim que o pedido for postado você recebe por e-mail o código de rastreamento para acompanhar no site da transportadora."],
+    ["De onde os pedidos são enviados?", "Do nosso Centro de Distribuição em Porto Alegre/RS, junto com o Certificado de Garantia."]
+  ]],
+  ["trocas", "Trocas e devoluções", [
+    ["Qual o prazo para troca ou devolução?", "Até 14 dias após o recebimento do produto. Entre em contato com a nossa Central de Atendimento para receber as instruções."],
+    ["Quais as condições para troca?", "O produto não pode ter sido usado e deve retornar nas mesmas condições em que foi entregue: lacres intactos, embalagem original sem danos e todos os acessórios."],
+    ["Quem paga o frete da troca?", "O custo do frete de retorno é por nossa conta, sem custo adicional para você."],
+    ["Como recebo o reembolso?", "No cartão, solicitamos o estorno à administradora (pode aparecer em faturas futuras). Em Pix, boleto ou transferência, reembolsamos em conta corrente ou poupança informada por você."]
+  ]],
+  ["garantia", "Garantia", [
+    ["O que a garantia vitalícia cobre?", "Garantimos que as peças não sofrerão escurecimento ou oxidação ao longo do tempo. Também há 1 ano de garantia contra desbotamento da cor e 1 ano para defeitos de fabricação (soldas, fechos e pedras que se soltam sem impacto)."],
+    ["Como aciono a garantia?", "Fale com nosso atendimento dentro do prazo e envie o Certificado de Garantia, número do pedido, informações da peça e detalhes do problema. Enviamos uma nova peça igual — ou outra de valor igual ou inferior, se estiver esgotada."],
+    ["O que não é coberto?", "Danos por mau uso, negligência, acidentes, quedas, colisões, uso indevido ou modificações nas peças, e pedras quebradas por descuido."]
+  ]],
+  ["atacado", "Atacado e revenda", [
+    ["Como funciona o desconto de atacado?", "É automático no carrinho conforme a quantidade de peças: 30% a partir de 15, 40% a partir de 20 e 50% a partir de 30 peças. Não precisa de cupom nem cadastro."],
+    ["Posso misturar produtos diferentes?", "Sim, todas as peças do site contam para o total — anéis, brincos, colares, pulseiras e tornozeleiras."],
+    ["Atacado tem troca e devolução?", "Para compras no atacado não aceitamos devoluções, mas aceitamos trocas em até 14 dias após o recebimento."],
+    ["Tem ajuda para quem está começando?", "Sim! Nossas vendedoras especialistas ajudam a montar o mix ideal pelo WhatsApp (51) 98033-4044."]
+  ]]
+];
+document.addEventListener("DOMContentLoaded", () => {
+  const { qs, qsa } = VF;
+  qs("#topics").innerHTML = FAQ.map(([id, n, l]) => `<a href="#${id}">${n}<span>${l.length}</span></a>`).join("");
+  qs("#groups").innerHTML = FAQ.map(([id, n, l]) => `<section class="group" id="${id}"><h2>${n}</h2><div class="faq">${l.map(([q, a]) => `<details><summary>${q}<span class="pl">+</span></summary><p>${a}</p></details>`).join("")}</div></section>`).join("");
+  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  qs("#q").addEventListener("input", e => {
+    const t = norm(e.target.value.trim()); let any = 0;
+    qsa(".group").forEach(g => { let c = 0;
+      g.querySelectorAll("details").forEach(d => { const ok = !t || norm(d.textContent).includes(t); d.style.display = ok ? "" : "none"; d.open = !!t && ok; c += ok; });
+      g.style.display = c ? "" : "none"; any += c; });
+    qs("#none").style.display = any ? "none" : "block";
+  });
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) qsa("#topics a").forEach(a => a.classList.toggle("on", a.hash === "#" + en.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
+  qsa(".group").forEach(g => io.observe(g));
+});
+</script>
+</body>
+</html>

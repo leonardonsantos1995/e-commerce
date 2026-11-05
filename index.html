@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria Ferrarini Joias — Joias à prova d'água com garantia vitalícia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .hero{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;padding-top:20px;overflow-x:clip;overflow-y:visible}
+  .hero-main{position:relative;border-radius:28px;overflow:hidden;min-height:600px;color:#fff;display:flex;align-items:flex-end}
+  .hero-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-main::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(15,12,8,.72));z-index:1}
+  .hero-main .txt{position:relative;z-index:2;padding:48px}
+  .hero-main h1{font-size:clamp(46px,6vw,82px);margin:14px 0 14px}
+  .hero-main h1 em{color:var(--gold-soft)}
+  .hero-main p{font-size:18px;color:#F1EADF;max-width:460px;margin-bottom:28px}
+  .hero-main .eyebrow{color:var(--gold-soft)}
+  .hero-side{display:grid;grid-template-rows:1fr 1fr;gap:20px}
+  .hcard{position:relative;border-radius:28px;overflow:hidden;display:flex;align-items:flex-end;padding:30px;min-height:290px}
+  .hcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .hcard:hover img{transform:scale(1.04)}
+  .hcard::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,12,8,.65),rgba(15,12,8,0) 75%);z-index:1}
+  .hcard .t{position:relative;z-index:2;color:#fff}
+  .hcard h3{font-size:40px;line-height:1}
+  .hcard p{color:#EFE8DD;font-size:14px;margin:8px 0 16px;max-width:240px}
+  .hcard .link-arrow{border-color:var(--gold-soft)}
+  .rating{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:#F1EADF}
+  .rating .st{color:var(--gold-soft);letter-spacing:2px}
+
+  .offers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .offer{background:#fff;border:1px solid var(--sand-2);border-radius:var(--radius);padding:22px;display:flex;gap:16px;align-items:center}
+  .offer .ic{flex:none;width:50px;height:50px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--gold-dark)}
+  .offer .ic svg{width:24px;height:24px}
+  .offer b{display:block;font-size:15px;text-transform:none}
+  .offer span{font-size:13px;color:var(--ink-2)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split .ph{border-radius:28px;overflow:hidden;aspect-ratio:4/5;background:var(--sand)}
+  .split .ph img{width:100%;height:100%;object-fit:cover}
+  .checks{list-style:none;display:grid;gap:14px;margin:26px 0 32px}
+  .checks li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:var(--ink-2)}
+  .checks li b{color:var(--ink)}
+  .checks .ic{flex:none;width:36px;height:36px;border-radius:50%;background:var(--gold-soft);color:var(--gold-dark);display:flex;align-items:center;justify-content:center}
+  .checks .ic svg{width:18px;height:18px}
+
+  .videos{grid-auto-columns:calc((100% - 88px)/5)}
+  .vid{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--sand-2)}
+  .vid video{width:100%;height:100%;object-fit:cover}
+  .vid .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:.3s}
+  .vid .play span{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center}
+  .vid.playing .play{opacity:0}
+
+  .feature > *,.split > *,.wholesale > *,.hero > *{min-width:0}
+  .feature{display:grid;grid-template-columns:1fr 1.3fr;border-radius:32px;overflow:hidden;background:var(--sand)}
+  .feature > .ph{position:relative;min-height:560px}
+  .feature > .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .feature .txt{padding:52px}
+  .feature .grid{grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .feature .card h4{font-size:14px}
+  .feature .card .ph{background:#fff}
+
+  .guarantee{position:relative;border-radius:32px;overflow:hidden;color:#fff;min-height:440px;display:flex;align-items:center}
+  .guarantee > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .guarantee::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,12,8,.78),rgba(15,12,8,.1));z-index:1}
+  .guarantee .txt{position:relative;z-index:2;padding:56px;max-width:600px}
+  .guarantee h2{color:#fff;margin:12px 0 16px}
+  .guarantee p{color:#EFE8DD;font-size:17px;margin-bottom:28px}
+  .guarantee .eyebrow{color:var(--gold-soft)}
+
+  .wholesale{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;background:var(--ink);color:#fff;border-radius:32px;padding:52px 56px}
+  .wholesale h2{color:#fff;margin:10px 0 12px}
+  .wholesale p{color:#CFC6B8}
+  .wtiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .wtiers div{border:1px solid #3a3631;border-radius:18px;padding:20px 14px;text-align:center}
+  .wtiers b{display:block;font-family:var(--serif);font-size:46px;font-weight:500;line-height:1;color:var(--gold-soft)}
+  .wtiers span{font-size:13px;color:#B9B0A3}
+
+  @media (max-width:1100px){
+    .hero{grid-template-columns:1fr}
+    .hero-main{min-height:520px}
+    .hero-side{grid-template-columns:1fr 1fr;grid-template-rows:none}
+    .offers{grid-template-columns:1fr 1fr}
+    .split,.feature,.wholesale{grid-template-columns:1fr}
+    .feature > .ph{min-height:0;aspect-ratio:4/3}
+    .feature > .ph img{object-position:center 18%}
+    .videos{grid-auto-columns:calc((100% - 44px)/3)}
+  }
+  @media (max-width:680px){
+    .hero{padding-top:12px;gap:12px}
+    .hero-main{min-height:500px;border-radius:22px}
+    .hero-main .txt{padding:28px 22px}
+    .hero-side{grid-template-columns:1fr;gap:12px}
+    .hcard{min-height:200px;border-radius:22px;padding:22px}
+    .hcard h3{font-size:32px}
+    .offers{grid-template-columns:1fr;gap:10px}
+    .offer{padding:16px}
+    .split{gap:32px}
+    .feature .txt{padding:30px 20px}
+    .feature > .ph{aspect-ratio:4/5}
+    .feature .grid{grid-template-columns:1fr 1fr}
+    .feature .grid .card:nth-child(3){display:none}
+    .guarantee .txt{padding:32px 24px}
+    .wholesale{padding:32px 22px}
+    .wtiers b{font-size:36px}
+    .videos{grid-auto-columns:46%}
+  }
+
+  /* ---------- Entrada do banner principal ---------- */
+  .hero-main > img{animation:kenburns 14s cubic-bezier(.2,.6,.2,1) both}
+  @keyframes kenburns{from{transform:scale(1.15)}to{transform:scale(1.02)}}
+  .hero-main .txt > *{animation:heroUp 1s cubic-bezier(.2,.7,.2,1) both}
+  .hero-main .txt > :nth-child(1){animation-delay:.2s}
+  .hero-main .txt > :nth-child(2){animation-delay:.32s}
+  .hero-main .txt > :nth-child(3){animation-delay:.48s}
+  .hero-main .txt > :nth-child(4){animation-delay:.6s}
+  .hero-main .txt > :nth-child(5){animation-delay:.72s}
+  @keyframes heroUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .hcard{animation:heroSide 1.1s cubic-bezier(.2,.7,.2,1) both}
+  .hcard:nth-child(1){animation-delay:.45s}
+  .hcard:nth-child(2){animation-delay:.6s}
+  @keyframes heroSide{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+  /* "Não escurece." com brilho dourado passando */
+  .hero-main h1 em{background:linear-gradient(100deg,var(--gold-soft) 20%,#fff8ea 40%,#d6b47a 55%,var(--gold-soft) 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldShine 5s ease-in-out 1.4s infinite}
+  @keyframes goldShine{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+  /* setas e ícones ganham vida no hover */
+  .offer{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+  .offer:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--gold-soft)}
+  .offer .ic{transition:transform .5s cubic-bezier(.3,.7,.2,1.3),background .3s}
+  .offer:hover .ic{transform:rotate(-8deg) scale(1.08);background:var(--gold-soft)}
+  .cat .ph{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+  .cat:hover .ph{transform:translateY(-6px);box-shadow:0 18px 30px -18px rgba(48,36,20,.45)}
+  .hcard .link-arrow::after{content:"→";display:inline-block;transition:transform .3s}
+  .hcard:hover .link-arrow::after{transform:translateX(5px)}
+  .wtiers div{transition:transform .35s,border-color .35s,background .35s}
+  .wtiers div:hover{transform:translateY(-4px);border-color:var(--gold);background:rgba(176,141,87,.08)}
+  @media (prefers-reduced-motion:reduce){
+    .hero-main > img,.hero-main .txt > *,.hcard,.hero-main h1 em{animation:none!important}
+    .hero-main h1 em{color:var(--gold-soft);background:none}
+  }
+</style>
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+
+<!-- HERO -->
+<section class="wrap hero">
+  <div class="hero-main">
+    <img src="https://victoriaferrarini.com/cdn/shop/files/ChatGPT_Image_Sep_28_2026_10_12_39_AM.png?width=1400" alt="Modelo usando joias Victoria Ferrarini na piscina">
+    <div class="txt">
+      <span class="eyebrow">À prova d'água, calor e suor</span>
+      <h1>Pode molhar.<br><em>Não escurece.</em></h1>
+      <p>Joias em aço inoxidável 316L com banho de ouro PVD, 10x mais espesso que os banhos tradicionais. Feitas para o seu dia a dia.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-light" href="colecao.html?c=lancamentos">Ver lançamentos</a>
+        <a class="btn" style="border:1.5px solid rgba(255,255,255,.7);color:#fff" href="colecao.html?c=mais-vendidos">Mais vendidos</a>
+      </div>
+      <div class="rating"><span class="st">★★★★★</span> Avaliada por mais de 1.200 clientes</div>
+    </div>
+  </div>
+  <div class="hero-side">
+    <a class="hcard" href="colecao.html?c=em-promocao">
+      <img src="https://victoriaferrarini.com/cdn/shop/files/ChatGPT_Image_Aug_10_2026_02_38_40_PM_Easy-Resize.com.jpg?width=900" alt="">
+      <div class="t"><span class="eyebrow" style="color:var(--gold-soft)">Promoção</span><h3>Leve 1,<br>ganhe 1</h3><p>Leve 2 ganhe 2, leve 3 ganhe 3.</p><span class="link-arrow">Aproveitar</span></div>
+    </a>
+    <a class="hcard" href="colecao.html?c=joias-pedras-naturais">
+      <img src="https://victoriaferrarini.com/cdn/shop/files/0CB354CB-CC36-426B-A939-C7DBC57B40D1.png?width=900" alt="">
+      <div class="t"><span class="eyebrow" style="color:var(--gold-soft)">Nova coleção</span><h3>Pedras &amp;<br>Pérolas</h3><p>Pedras e pérolas de águas naturais.</p><span class="link-arrow">Conhecer</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- OFFERS -->
+<section class="wrap section tight">
+  <div class="offers" id="offers"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="wrap section tight" style="padding-top:24px">
+  <div class="row-head"><div class="section-head"><span class="eyebrow">Categorias</span><h2>Encontre a sua joia</h2></div><a class="link-arrow" href="colecoes.html">Ver todas as coleções</a></div>
+  <div class="cats" id="cats"></div>
+</section>
+
+<!-- TABBED PRODUCTS -->
+<section class="wrap section">
+  <div class="row-head">
+    <div class="section-head"><span class="eyebrow">Destaques</span><h2>As queridinhas do momento</h2></div>
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <div class="tabs" id="homeTabs">
+        <button class="tab active" data-c="mais-vendidos">Mais vendidos</button>
+        <button class="tab" data-c="lancamentos">Lançamentos</button>
+        <button class="tab" data-c="em-promocao">Promoções</button>
+      </div>
+      <div class="rail-nav"><button data-rail="r1" data-dir="-1" aria-label="Anterior"></button><button data-rail="r1" data-dir="1" aria-label="Próximo"></button></div>
+    </div>
+  </div>
+  <div id="r1wrap"></div>
+  <div style="text-align:center;margin-top:36px"><a class="btn btn-line" id="tabMore" href="colecao.html?c=mais-vendidos">Ver todos os mais vendidos</a></div>
+</section>
+
+<!-- WATERPROOF SPLIT -->
+<section class="wrap section" style="padding-top:0">
+  <div class="split">
+    <div class="ph"><img loading="lazy" src="https://victoriaferrarini.com/cdn/shop/files/DA92384A-B602-41B2-9579-E94312F04A59.jpg?width=1000" alt="Joias na praia"></div>
+    <div>
+      <span class="eyebrow">100% à prova d'água</span>
+      <h2 style="margin:12px 0 14px">Use no banho, no mar, na piscina e na academia</h2>
+      <p style="color:var(--ink-2);font-size:17px">Joias pensadas para acompanhar a sua rotina — sem precisar tirar.</p>
+      <ul class="checks" id="checks"></ul>
+      <a class="btn btn-dark" href="colecoes.html">Comprar agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="section" style="background:var(--sand)">
+  <div class="wrap">
+    <div class="row-head">
+      <div class="section-head"><span class="eyebrow">Quem usa, ama</span><h2>Veja por que milhares de clientes escolhem a Victoria Ferrarini</h2></div>
+      <div class="rail-nav"><button data-rail="vids" data-dir="-1" aria-label="Anterior"></button><button data-rail="vids" data-dir="1" aria-label="Próximo"></button></div>
+    </div>
+    <div class="rail videos" id="vids"></div>
+  </div>
+</section>
+
+<!-- FEATURE: PEDRAS -->
+<section class="wrap section">
+  <div class="feature">
+    <div class="ph"><img loading="lazy" src="https://victoriaferrarini.com/cdn/shop/files/B5B8AA89-69AC-4BE1-818D-99C64E907E12.png?width=1000" alt=""></div>
+    <div class="txt">
+      <span class="eyebrow">Nova coleção</span>
+      <h2 style="margin:12px 0 12px">Pedras de Águas Naturais</h2>
+      <p style="color:var(--ink-2);font-size:16.5px;max-width:480px">Celebre o extraordinário com peças criadas para acompanhar seus movimentos. Joias para cada capítulo da sua história.</p>
+      <div class="grid" id="pearls"></div>
+      <a class="btn btn-dark" style="margin-top:30px" href="colecao.html?c=joias-pedras-naturais">Ver coleção completa</a>
+    </div>
+  </div>
+</section>
+
+<!-- MIX -->
+<section class="wrap section" style="padding-top:0">
+  <div class="row-head">
+    <div class="section-head"><span class="eyebrow">Combine e sobreponha</span><h2>Monte seu mix</h2><p>Peças pensadas para usar juntas. Misture texturas, comprimentos e brilhos.</p></div>
+    <div class="rail-nav"><button data-rail="r2" data-dir="-1" aria-label="Anterior"></button><button data-rail="r2" data-dir="1" aria-label="Próximo"></button></div>
+  </div>
+  <div id="r2wrap"></div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="wrap section" style="padding-top:0">
+  <div class="guarantee">
+    <img loading="lazy" src="https://victoriaferrarini.com/cdn/shop/files/ChatGPT_Image_Jul_13_2026_09_20_19_PM_68be5128-c80e-4c85-89fa-b932b83ea984.png?width=1600" alt="">
+    <div class="txt">
+      <span class="eyebrow">Garantia vitalícia na cor</span>
+      <h2>Qualidade que dura para sempre</h2>
+      <p>Cada joia é fabricada em aço inoxidável hipoalergênico com revestimento de ouro PVD, 10x mais espesso e duradouro que os banhos tradicionais. Todas acompanham Certificado de Garantia.</p>
+      <a class="btn btn-light" href="garantia.html">Entenda a garantia</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHOLESALE CTA -->
+<section class="wrap section" style="padding-top:0">
+  <div class="wholesale">
+    <div>
+      <span class="eyebrow" style="color:var(--gold-soft)">Para revendedoras</span>
+      <h2>Compre no atacado com até 50% OFF</h2>
+      <p>Sem cadastro e sem cupom: o desconto é aplicado automaticamente no carrinho conforme você adiciona as peças.</p>
+      <a class="btn btn-gold" style="margin-top:26px" href="atacado.html">Conhecer o atacado</a>
+    </div>
+    <div class="wtiers"><div><b>30%</b><span>15+ peças</span></div><div><b>40%</b><span>20+ peças</span></div><div><b>50%</b><span>30+ peças</span></div></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="wrap section" style="padding-top:0">
+  <div class="newsletter">
+    <div><span class="eyebrow">Clube Victoria</span><h2 style="margin:12px 0 10px">Receba lançamentos e ofertas antes de todo mundo</h2><p style="color:var(--ink-2)">Cadastre seu e-mail e fique por dentro das novidades.</p></div>
+    <form class="nl-form" onsubmit="event.preventDefault();VF.toast('✓ Obrigada! Você receberá nossas novidades.');this.reset()"><input type="email" required placeholder="Seu melhor e-mail"><button class="btn btn-dark">Quero receber</button></form>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const { I, COLS, col, img, url, railHTML, bindRail, cardHTML, qs, qsa } = VF;
+  qsa(".rail-nav button").forEach(b => b.innerHTML = b.dataset.dir === "1" ? I.right : I.left);
+
+  qs("#offers").innerHTML = [
+    [I.gift, "Leve 1, ganhe 1", "Leve 2 ganhe 2, leve 3 ganhe 3"],
+    [I.coin, "10% de cashback", "Crédito para sua próxima compra"],
+    [I.truck, "Frete grátis", "Para todo o Brasil acima de R$ 199"],
+    [I.card, "6x sem juros", "Compre com tranquilidade e segurança"]
+  ].map(o => `<div class="offer"><div class="ic">${o[0]}</div><div><b>${o[1]}</b><span>${o[2]}</span></div></div>`).join("");
+
+  qs("#cats").innerHTML = Object.entries(COLS).filter(([, c]) => c.cat).map(([h, c]) =>
+    `<a class="cat" href="${url.c(h)}"><div class="ph"><img loading="lazy" src="${img(c.ic, 400)}" alt=""></div><b>${c.n}</b><small>${col(h).length} peças</small></a>`).join("");
+
+  const r1 = c => { qs("#r1wrap").innerHTML = railHTML("r1", col(c).filter(p => p.a).slice(0, 12)); };
+  r1("mais-vendidos"); bindRail("r1");
+  qsa("#homeTabs .tab").forEach(t => t.addEventListener("click", () => {
+    qsa("#homeTabs .tab").forEach(x => x.classList.remove("active")); t.classList.add("active");
+    r1(t.dataset.c); qs("#tabMore").href = url.c(t.dataset.c); qs("#tabMore").textContent = "Ver todos: " + COLS[t.dataset.c].n.toLowerCase();
+  }));
+
+  qs("#checks").innerHTML = [
+    [I.drop, "<b>Não escurece, não esverdeia</b> e não mancha a pele"],
+    [I.leaf, "<b>Hipoalergênicas:</b> livres de níquel, cádmio e chumbo"],
+    [I.shield, "<b>Garantia vitalícia</b> contra escurecimento e oxidação"]
+  ].map(c => `<li><span class="ic">${c[0]}</span><span>${c[1]}</span></li>`).join("");
+
+  const vids = ["9664db6133ed4f5a97232e1cfadc15bf","20f3c3106c7849389dccd250a8b74099","e683e4be0de74d999f9c232428ec4f3b","e02f5a2c1f044142b48111c4b52327e6","927eb4d2b64547a59201e53386e69a36","d4464971cbb44684bc0cd31ef9b47c5a","d0f3ce82a047462d8aa138994dc98597","d696f1f719664699a7f3d9f01ece9e38","f05a623d876745a6b94fd061706e71b3","10860121f755435c9c0077d3cff66fea"];
+  qs("#vids").innerHTML = vids.map(v => `<div class="vid"><video muted loop playsinline preload="metadata" src="https://cdn.shopify.com/videos/c/o/v/${v}.mp4#t=0.5"></video><div class="play"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div></div>`).join("");
+  qsa(".vid").forEach(v => {
+    const el = v.querySelector("video");
+    v.addEventListener("mouseenter", () => { el.play(); v.classList.add("playing"); });
+    v.addEventListener("mouseleave", () => { el.pause(); v.classList.remove("playing"); });
+    v.addEventListener("click", () => { el.paused ? (el.play(), v.classList.add("playing")) : (el.pause(), v.classList.remove("playing")); });
+  });
+  bindRail("vids");
+
+  qs("#pearls").innerHTML = col("joias-pedras-naturais").filter(p => p.a).slice(0, 3).map(cardHTML).join("");
+  qs("#r2wrap").innerHTML = railHTML("r2", col("monte-se-mix").filter(p => p.a).slice(0, 12)); bindRail("r2");
+
+  /* ---------- Movimento ---------- */
+  const { reveal, countUp, parallax } = VF.motion;
+  const items = ["100% à prova d'água", "Garantia vitalícia", "Hipoalergênicas", "Frete grátis acima de R$ 199", "6x sem juros", "10% de cashback", "Leve 1, ganhe 1"];
+  qs("#ticker").innerHTML = [...items, ...items].map(t => `<span>${t}<i>✦</i></span>`).join("");
+
+  const cardsIn = sel => qsa(sel).forEach((c, i) => reveal(c, { delay: (i % 4) * 90 }));
+  reveal(".row-head, section > .section-head");
+  reveal("#offers .offer", { stagger: 90 });
+  reveal("#cats .cat", { type: "zoom", stagger: 70 });
+  cardsIn("#r1 .card");
+  qsa("#homeTabs .tab").forEach(t => t.addEventListener("click", () => cardsIn("#r1 .card")));
+  reveal(".split .ph", { type: "photo" });
+  reveal(".split > div:last-child > :not(.checks)", { stagger: 90, delay: 150 });
+  reveal("#checks li", { type: "left", stagger: 110, delay: 300 });
+  reveal("#vids .vid", { stagger: 80 });
+  reveal(".feature > .ph", { type: "photo" });
+  reveal(".feature .txt > :not(.grid)", { stagger: 90, delay: 150 });
+  cardsIn("#pearls .card");
+  cardsIn("#r2 .card");
+  reveal(".guarantee .txt > *", { stagger: 110, delay: 120 });
+  reveal(".wholesale > div:first-child > *", { stagger: 90 });
+  reveal(".wtiers > div", { stagger: 130, delay: 200, onIn: el => countUp(el.querySelector("b")) });
+  reveal(".newsletter > *", { stagger: 120 });
+  parallax([qs(".split .ph"), qs(".feature > .ph"), qs(".guarantee")], 36);
+  qsa(".hero-main .btn-light, .wholesale .btn-gold, .feature .btn-dark, .split .btn-dark").forEach(b => b.classList.add("shine"));
+});
+</script>
+</body>
+</html>

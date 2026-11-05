@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coleção — Victoria Ferrarini Joias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .toolbar{position:sticky;top:78px;z-index:30;background:rgba(252,251,249,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--sand-2);margin-bottom:32px}
+  .toolbar .wrap{display:flex;align-items:center;gap:12px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+  .fchip{padding:9px 16px;border-radius:999px;border:1px solid var(--sand-2);background:#fff;font-size:13.5px;font-weight:500;transition:.2s;white-space:nowrap}
+  .fchip:hover{border-color:var(--ink)}
+  .fchip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .sel{border:1px solid var(--sand-2);background:#fff;border-radius:999px;padding:9px 36px 9px 16px;font-size:13.5px;font-weight:500;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231D1B19' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;cursor:pointer;white-space:nowrap}
+  .toggle input{appearance:none;width:36px;height:20px;border-radius:999px;background:var(--sand-2);position:relative;cursor:pointer;transition:.2s}
+  .toggle input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+  .toggle input:checked{background:var(--ink)}
+  .toggle input:checked::after{left:18px}
+  .count{font-size:14px;color:var(--muted);margin-bottom:20px}
+  .more{text-align:center;margin-top:48px}
+  .more p{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .more .bar{max-width:240px;margin:0 auto 22px}
+  .other{display:flex;gap:10px;flex-wrap:wrap}
+  .ocol{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--sand-2);border-radius:999px;padding:6px 18px 6px 6px;font-weight:600;font-size:14px;transition:.2s}
+  .ocol:hover{border-color:var(--ink)}
+  .ocol img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .noresult{text-align:center;padding:60px 0;color:var(--ink-2)}
+  @media (max-width:1100px){.toolbar{top:78px}}
+  @media (max-width:680px){
+    .toolbar{top:66px}
+    .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;flex:none;scrollbar-width:none}
+    .chips::-webkit-scrollbar{display:none}
+  }
+</style>
+</head>
+<body data-page="">
+<div id="site-header"></div>
+
+<section class="page-hero" id="hero">
+  <img id="heroImg" src="" alt="">
+  <div class="wrap">
+    <nav class="crumbs"><a href="index.html">Início</a> / <a href="colecoes.html">Coleções</a> / <span id="crumb"></span></nav>
+    <h1 id="title"></h1>
+    <p id="desc"></p>
+  </div>
+</section>
+
+<div class="toolbar"><div class="wrap">
+  <div class="chips" id="chips"></div>
+  <label class="toggle"><input type="checkbox" id="onlyAvail" checked> Só disponíveis</label>
+  <select class="sel" id="sort" aria-label="Ordenar">
+    <option value="rel">Em destaque</option>
+    <option value="new">Mais recentes</option>
+    <option value="asc">Menor preço</option>
+    <option value="desc">Maior preço</option>
+    <option value="off">Maior desconto</option>
+    <option value="az">A–Z</option>
+  </select>
+</div></div>
+
+<main class="wrap">
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <div class="more" id="more"></div>
+</main>
+
+<section class="wrap section">
+  <div class="section-head"><span class="eyebrow">Continue explorando</span><h2>Outras coleções</h2></div>
+  <div class="other" id="other"></div>
+</section>
+
+<div data-benefits="light"></div>
+<div id="site-footer"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const { COLS, col, img, url, cardHTML, qs, qsa, params, off, TYPE2COL } = VF;
+  const h = COLS[params.get("c")] ? params.get("c") : "todos";
+  const meta = h === "todos" ? { n: "Todas as joias", d: "Todo o catálogo Victoria Ferrarini em um só lugar.", b: "ChatGPT_Image_Aug_13_2026_08_26_49_PM_Easy-Resize.com.jpg" } : COLS[h];
+  document.title = meta.n + " — Victoria Ferrarini Joias";
+  document.body.dataset.page = h;
+  qsa(".menu a").forEach(a => a.classList.toggle("active", a.getAttribute("href") === url.c(h)));
+  qs("#heroImg").src = img(meta.b, 1800); qs("#title").textContent = meta.n; qs("#crumb").textContent = meta.n; qs("#desc").textContent = meta.d;
+
+  const all = col(h);
+  const rank = Object.fromEntries(all.map((p, i) => [p.h, i]));
+  const isCat = !!meta.cat;
+  const PRICE = [["Até R$ 100", p => p.p <= 100], ["R$ 100 a 140", p => p.p > 100 && p.p <= 140], ["Acima de R$ 140", p => p.p > 140], ["Com desconto", p => !!p.o]];
+  const types = [...new Set(all.map(p => p.c))];
+  const state = { type: "", price: -1, avail: true, sort: "rel", shown: 24 };
+
+  const chips = [];
+  if (!isCat && types.length > 1) chips.push(`<button class="fchip on" data-type="">Todas</button>`, ...types.map(t => `<button class="fchip" data-type="${t}">${t === "Tornozeleira" ? "Tornozeleiras" : t}</button>`));
+  chips.push(...PRICE.map((p, i) => `<button class="fchip" data-price="${i}">${p[0]}</button>`));
+  qs("#chips").innerHTML = chips.join("");
+
+  function list() {
+    let l = all.filter(p => (!state.type || p.c === state.type) && (state.price < 0 || PRICE[state.price][1](p)) && (!state.avail || p.a));
+    const s = { rel: (a, b) => rank[a.h] - rank[b.h], new: (a, b) => b.d - a.d, asc: (a, b) => a.p - b.p, desc: (a, b) => b.p - a.p, off: (a, b) => off(b) - off(a), az: (a, b) => a.t.localeCompare(b.t) }[state.sort];
+    return l.sort(s);
+  }
+  function render() {
+    const l = list(), show = l.slice(0, state.shown);
+    qs("#count").textContent = `${l.length} ${l.length === 1 ? "peça" : "peças"}`;
+    qs("#grid").innerHTML = show.map(cardHTML).join("");
+    qs("#grid").style.display = l.length ? "" : "none";
+    qs("#more").innerHTML = !l.length
+      ? `<div class="noresult"><p style="font-size:18px;color:var(--ink);font-weight:600;margin-bottom:6px">Nenhuma peça encontrada</p><p>Tente remover algum filtro.</p><button class="btn btn-line" style="margin-top:18px" id="clear">Limpar filtros</button></div>`
+      : l.length > state.shown ? `<p>Você viu ${show.length} de ${l.length} peças</p><div class="bar"><div class="fill" style="width:${show.length / l.length * 100}%"></div></div><button class="btn btn-line" id="loadMore">Carregar mais</button>` : "";
+  }
+  qs("#chips").addEventListener("click", e => {
+    const b = e.target.closest(".fchip"); if (!b) return;
+    if ("type" in b.dataset) { state.type = b.dataset.type; qsa("[data-type]").forEach(x => x.classList.toggle("on", x === b)); }
+    else { const i = +b.dataset.price; state.price = state.price === i ? -1 : i; qsa("[data-price]").forEach(x => x.classList.toggle("on", +x.dataset.price === state.price)); }
+    state.shown = 24; render();
+  });
+  qs("#onlyAvail").addEventListener("change", e => { state.avail = e.target.checked; render(); });
+  qs("#sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
+  qs("#more").addEventListener("click", e => {
+    if (e.target.id === "loadMore") { state.shown += 24; render(); }
+    if (e.target.id === "clear") { state.type = ""; state.price = -1; state.avail = false; qs("#onlyAvail").checked = false; qsa(".fchip").forEach(x => x.classList.toggle("on", x.dataset.type === "")); render(); }
+  });
+  render();
+
+  qs("#other").innerHTML = Object.entries(COLS).filter(([k]) => k !== h).map(([k, c]) => `<a class="ocol" href="${url.c(k)}"><img src="${img(c.ic || c.b, 120)}" alt="">${c.n}</a>`).join("");
+});
+</script>
+</body>
+</html>

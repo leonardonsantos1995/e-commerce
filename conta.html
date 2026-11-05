@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha conta — Victoria Ferrarini Joias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .acc{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 116px)}
+  .acc .ph{position:relative}
+  .acc .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .acc .ph .q{position:absolute;left:40px;right:40px;bottom:40px;color:#fff;z-index:2}
+  .acc .ph::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,12,8,.65));z-index:1}
+  .acc .ph h2{color:#fff;font-size:42px}
+  .acc .box{display:flex;align-items:center;justify-content:center;padding:56px 24px}
+  .acc .inner{width:100%;max-width:420px}
+  .acc h1{font-size:44px;margin:8px 0 8px}
+  .acc .sub{color:var(--ink-2);margin-bottom:28px}
+  .perks{display:grid;gap:12px;margin:26px 0;padding:22px;background:var(--sand);border-radius:18px}
+  .perks div{display:flex;gap:12px;align-items:center;font-size:14.5px;color:var(--ink-2)}
+  .perks svg{width:20px;height:20px;color:var(--gold-dark);flex:none}
+  .switch{text-align:center;font-size:14.5px;color:var(--ink-2);margin-top:22px}
+  .switch button{font-weight:700;color:var(--ink);text-decoration:underline}
+  .forgot{font-size:13px;color:var(--ink-2);text-decoration:underline;display:block;text-align:right;margin:-6px 0 18px}
+  @media (max-width:900px){.acc{grid-template-columns:1fr}.acc .ph{display:none}}
+</style>
+</head>
+<body data-page="conta">
+<div id="site-header"></div>
+<main class="acc">
+  <div class="ph"><img src="https://victoriaferrarini.com/cdn/shop/files/DF2ED408-4CDD-4670-937D-A18CC41E7E5F.png?width=1400" alt=""><div class="q"><span class="eyebrow" style="color:var(--gold-soft)">Clube Victoria</span><h2>Seu cashback, seus pedidos e seus favoritos em um só lugar.</h2></div></div>
+  <div class="box"><div class="inner" id="inner"></div></div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const { qs, I, toast } = VF;
+  const perks = `<div class="perks"><div>${I.coin} 10% de cashback em todas as compras</div><div>${I.truck} Acompanhe seus pedidos e rastreios</div><div>${I.shield} Acesse seus certificados de garantia</div></div>`;
+  const views = {
+    login: `<span class="eyebrow">Minha conta</span><h1>Bem-vinda de volta</h1><p class="sub">Entre para acompanhar pedidos e usar seu cashback.</p>
+      <form id="f"><div class="field"><label>E-mail</label><input type="email" required placeholder="voce@email.com"></div>
+      <div class="field"><label>Senha</label><input type="password" required placeholder="••••••••"></div>
+      <a href="#" class="forgot">Esqueci minha senha</a><button class="btn btn-dark btn-block">Entrar</button></form>
+      <p class="switch">Ainda não tem conta? <button data-v="signup">Criar conta</button></p>`,
+    signup: `<span class="eyebrow">Minha conta</span><h1>Crie sua conta</h1><p class="sub">Leva menos de um minuto.</p>${perks}
+      <form id="f"><div class="field"><label>Nome</label><input required placeholder="Seu nome"></div>
+      <div class="field"><label>E-mail</label><input type="email" required placeholder="voce@email.com"></div>
+      <div class="field"><label>Senha</label><input type="password" required placeholder="Mínimo 6 caracteres"></div>
+      <button class="btn btn-dark btn-block">Criar conta</button></form>
+      <p class="switch">Já tem conta? <button data-v="login">Entrar</button></p>`
+  };
+  const show = v => { qs("#inner").innerHTML = views[v]; qs("#f").onsubmit = e => { e.preventDefault(); toast("Protótipo: no site real, aqui você acessa sua conta."); }; };
+  qs("#inner").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) show(b.dataset.v); });
+  show("login");
+});
+</script>
+</body>
+</html>
