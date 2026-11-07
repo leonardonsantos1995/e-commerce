@@ -57,6 +57,13 @@ const VF = (() => {
   const TYPE2COL = { "Anéis": "aneis", "Brincos": "brincos", "Colares": "colares", "Pulseiras e Braceletes": "pulseiras-e-braceletes", "Tornozeleira": "tornozeleiras" };
   const col = h => (h === "todos" ? PRODUCTS.map(p => p.h) : (COLLECTIONS[h] || [])).map(x => BY[x]).filter(Boolean);
   const isNew = p => (COLLECTIONS.lancamentos || []).slice(0, 16).includes(p.h);
+  /* Tamanhos de anel: "14 / Rosê" → "14"; anéis sem numeração e "Ajustável" servem em qualquer tamanho */
+  const sizeOf = vt => String(vt).split(" / ")[0].trim();
+  const sizesAvail = p => new Set((p.v || []).filter(v => v[2]).map(v => sizeOf(v[0])));
+  const isAdjustable = p => p.c === "Anéis" && !p.v && /ajust/i.test(p.t);
+  const SIZE_KEY = "vf_sizes";
+  const prefSizes = () => { try { return new Set(JSON.parse(sessionStorage.getItem(SIZE_KEY) || "[]")); } catch (e) { return new Set(); } };
+  const setPrefSizes = s => sessionStorage.setItem(SIZE_KEY, JSON.stringify([...s]));
   const off = p => p.o ? Math.round((1 - p.p / p.o) * 100) : 0;
   const url = {
     p: h => `produto.html?p=${encodeURIComponent(h)}`,
@@ -176,7 +183,7 @@ const VF = (() => {
   /* ---------- Product card ---------- */
   function cardHTML(p) {
     const d = off(p), out = !p.a;
-    const badges = [out ? '<span class="badge out">Esgotado</span>' : "", !out && d ? `<span class="badge">-${d}%</span>` : "", !out && isNew(p) ? '<span class="badge new">Novo</span>' : ""].join("");
+    const badges = [out ? '<span class="badge out">Esgotado</span>' : "", !out && d ? `<span class="badge">-${d}%</span>` : "", !out && isNew(p) ? '<span class="badge new">Novo</span>' : "", !out && isAdjustable(p) ? '<span class="badge adj">Ajustável</span>' : ""].join("");
     const varies = p.v && new Set(p.v.map(v => v[1])).size > 1;
     return `<article class="card${out ? " soldout" : ""}" data-card="${p.h}">
       <a class="ph" href="${url.p(p.h)}">
@@ -194,8 +201,8 @@ const VF = (() => {
     const on = (p.on || "Opção").toLowerCase();
     return `<button class="qa-add" data-fab="${p.h}" aria-haspopup="dialog" aria-expanded="false">${I.bagPlus} <span><span class="lg">Escolher </span>${on}</span> <span class="chev">${I.chev}</span></button>`;
   }
-  const sizePickHTML = p => `<div class="tip-h"><span>Escolha o ${(p.on || "tamanho").toLowerCase()}</span><a href="${url.p(p.h)}">Ver detalhes</a></div>
-    <div class="qa-opts">${p.v.map((v, i) => `<button style="--i:${i}" data-qv="${v[0]}" data-add="${p.h}" ${v[2] ? "" : "disabled"} aria-label="${p.on} ${v[0]}${v[2] ? "" : " (esgotado)"}">${v[0]}</button>`).join("")}</div>
+  const sizePickHTML = (p, pref = prefSizes()) => `<div class="tip-h"><span>Escolha o ${(p.on || "tamanho").toLowerCase()}</span><a href="${url.p(p.h)}">Ver detalhes</a></div>
+    <div class="qa-opts">${p.v.map((v, i) => `<button style="--i:${i}" class="${pref.has(sizeOf(v[0])) ? "pref" : ""}" data-qv="${v[0]}" data-add="${p.h}" ${v[2] ? "" : "disabled"} aria-label="${p.on} ${v[0]}${v[2] ? "" : " (esgotado)"}">${v[0]}</button>`).join("")}</div>
     ${p.v.some(v => !v[2]) ? '<p class="tip-note">Riscado = esgotado</p>' : ""}`;
   function addedFeedback(card, p, label) {
     if (!card) return;
@@ -264,7 +271,8 @@ const VF = (() => {
     addEventListener("resize", () => anchor && place());
     addEventListener("scroll", () => anchor && place(), { passive: true });
     document.addEventListener("scroll", e => { if (anchor && e.target !== document && e.target.contains?.(anchor)) close(); }, true);
-    return { open, close, get anchor() { return anchor; }, get ctx() { return opts; }, contains: n => el && el.contains(n) };
+    function update(html) { if (!anchor) return; el.querySelector(".tip-body").innerHTML = html; place(); }
+    return { open, close, update, get anchor() { return anchor; }, get ctx() { return opts; }, contains: n => el && el.contains(n) };
   })();
   function railHTML(id, list) {
     return `<div class="rail" id="${id}">${list.map(cardHTML).join("")}</div>`;
@@ -515,5 +523,5 @@ const VF = (() => {
     return { reveal, countUp, parallax, reduce };
   })();
 
-  return { motion, tip, SITE, FILES, WA, img, brl, inst, qs, qsa, params, BY, COLS, TYPE2COL, col, off, isNew, url, I, cardHTML, railHTML, bindRail, benefitsHTML, add, totals, meters, cart: () => cart, setQty, linePrice, lineHTML, toast, open, close };
+  return { sizeOf, sizesAvail, isAdjustable, prefSizes, setPrefSizes, motion, tip, SITE, FILES, WA, img, brl, inst, qs, qsa, params, BY, COLS, TYPE2COL, col, off, isNew, url, I, cardHTML, railHTML, bindRail, benefitsHTML, add, totals, meters, cart: () => cart, setQty, linePrice, lineHTML, toast, open, close };
 })();

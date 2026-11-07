@@ -96,13 +96,15 @@
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const { BY, COLS, TYPE2COL, col, img, brl, inst, url, I, qs, qsa, params, off, add, toast, railHTML, bindRail, WA, totals } = VF;
+  const { BY, COLS, TYPE2COL, col, img, brl, inst, url, I, qs, qsa, params, off, add, toast, railHTML, bindRail, WA, totals, sizeOf, prefSizes } = VF;
   qsa(".rail-nav button").forEach(b => b.innerHTML = b.dataset.dir === "1" ? I.right : I.left);
   const p = BY[params.get("p")] || PRODUCTS.find(x => x.a);
   document.title = p.t + " — Victoria Ferrarini Joias";
   const cHandle = TYPE2COL[p.c];
   const cName = cHandle ? COLS[cHandle].n : p.c;
-  let variant = p.v ? (p.v.find(v => v[2]) || p.v[0]) : null;
+  // se a pessoa filtrou por tamanho na listagem, já abre com esse tamanho (se disponível)
+  const pref = prefSizes();
+  let variant = p.v ? (p.v.find(v => v[2] && pref.has(sizeOf(v[0]))) || p.v.find(v => v[2]) || p.v[0]) : null;
   let qty = 1;
   const price = () => variant ? variant[1] : p.p;
   const available = () => variant ? !!variant[2] : !!p.a;
